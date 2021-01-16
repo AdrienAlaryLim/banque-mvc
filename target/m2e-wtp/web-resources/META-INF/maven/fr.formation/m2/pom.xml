@@ -13,6 +13,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<spring.security.version>4.2.13.RELEASE</spring.security.version>
+		<spring.webflow.version>2.4.4.RELEASE</spring.webflow.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -143,6 +144,12 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+    		<artifactId>spring-webflow</artifactId>
+			<version>${spring.webflow.version}</version>
 		</dependency>
 		
 	</dependencies>
