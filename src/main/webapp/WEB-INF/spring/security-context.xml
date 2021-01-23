@@ -21,7 +21,7 @@
 	
 	<http auto-config="true">
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<logout logout-success-url="/"/> 
+		<!-- <logout logout-success-url="/"/> -->
 	</http>
 	
 	<beans:bean id="authenticationLoggerListener" 

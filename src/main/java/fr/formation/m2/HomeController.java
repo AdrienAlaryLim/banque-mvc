@@ -40,13 +40,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
-	public String adminPage(Model model) {
-		model.addAttribute("message", "Page d'administration");
-		
-		return "admin";
-	}
-	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */

@@ -27,17 +27,14 @@ tr:nth-child(even) {
 <h1>Fonctions utilisables</h1>
 <table>
 	<tr><th>url </th> <th>description</th> </tr>
-	<tr><td><a href="findAllClients"> Trouver tous les clients </a> </td> <td>Renvoie le détail de tous les clients</td></tr>
-	<tr><td><a href="findClient"> Trouver un client </a></td> <td>Formulaire de recherche client</td></tr>
-	<tr><td><a href="insertClient/default"> Créer un client par défaut </a></td> <td>Créé un utilisateur par défaut (vaut le détour!)</td></tr>
-	<tr><td><a href="insertClient"> Créer un client </a></td> <td>Renvoie un formulaire de création de client</td></tr>
-	<tr><td><a href="findCompte"> Trouver un compte </a></td> <td>Formulaire de recherche de compte</td></tr>
-	<tr><td><a href="findComptesClient"> Trouver tous les comptes d'un client </a></td> <td>Formulaire de recherche de comptes liés à un client</td></tr>
+	<tr><td><a href="admin/homeAdmin"> Panneau admin </a> </td> <td>Ouvre la page administrateur</td></tr>
+	<tr><td><a href="user/homeUser"> Panneau user </a> </td> <td>Ouvre la page user</td></tr>
 	<tr><td><a href="login"> Login </a></td> <td>Formulaire de connexion utilisateur </td></tr>
-	<tr><td><a href="<c:url value="/logout" />">Logout</a></td> <td> Quitter la connexion utilisateur </td> </tr>
-	<tr><td><a href="<c:url value='/j_spring_security_logout'/>"> Déconnexion </a></td> <td>Quitter la connexion</td></tr>
+	<tr><td><a href="<c:url value="/j_spring_security_logout"/>"> Déconnexion </a></td> <td>Quitter la connexion</td></tr>
+	
 </table>
 
+<br><br><br><br><br><br><br><br>
 
 <h2> Default test mapping</h2>
 <table>

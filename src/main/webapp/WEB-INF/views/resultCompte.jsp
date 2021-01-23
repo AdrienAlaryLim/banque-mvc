@@ -28,5 +28,6 @@ tr:nth-child(even) {
 		<li>Solde : ${compte.solde }</li>
 		<li>Nom du client : ${compte.client.nom}</li>
 	</ul>
+	<a href="../"> Retour accueil </a>
 </body>
 </html>

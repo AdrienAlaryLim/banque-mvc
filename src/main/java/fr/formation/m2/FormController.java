@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.formation.m2.spring.banque.bdd.dao.exec.Create;
 import fr.formation.m2.spring.banque.bdd.dao.exec.Find;
+import fr.formation.m2.spring.banque.bdd.dao.exec.Update;
 import fr.formation.m2.spring.banque.bdd.entities.Client;
 import fr.formation.m2.spring.banque.bdd.entities.Compte;
 import fr.formation.m2.spring.banque.bdd.entities.User;
@@ -23,12 +24,12 @@ public class FormController {
 	private User sessionUser;
 	
 	//Controleur qui affiche le formulaire vide
-	@RequestMapping(value="/insertClient")
+	@RequestMapping(value="/admin/createClient")
 	public String ajoutClient() {
 		return "insertClient"; //le formulaire à appeler
 	}
 
-	@RequestMapping(value="/insertClient", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/createClient", method=RequestMethod.POST)
 	public String ClientAjoute(Model model, 
 		@RequestParam("nom") String nom,
 		@RequestParam("prenom") String prenom,
@@ -49,12 +50,7 @@ public class FormController {
 		return "result";
 	}
 	
-	@RequestMapping(value="/ajoutUser")
-	public String ajouterUser(){
-		return "addUser";
-	}
-	
-	@RequestMapping(value = "/insertClient/default")
+	@RequestMapping(value = "/admin/createClient/default")
 	public String insertClientParDefaut(Model model) {
 		Client client = new Client();
 		client.setNom("Kardashian");
@@ -70,12 +66,12 @@ public class FormController {
 		return "result";
 	}
 	
-	@RequestMapping(value = "/findClient")
+	@RequestMapping(value = "/admin/findClient")
 	public String findClient(){
 		return "findClient";
 	}
 	
-	@RequestMapping(value="/findClient", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/findClient", method=RequestMethod.POST)
 	public String treatmentFindClient(Model model, @RequestParam("id") String id)
 	{
 		Client client = new Client();
@@ -87,24 +83,49 @@ public class FormController {
 		return "result";
 	}
 	
-	@RequestMapping(value = "/findAllClients")
-	public String treatmentFindClient(Model model)
-	{
-		List<Client> listOfClients = new ArrayList<Client>();
-			
-		listOfClients = Find.findAllClients();		
-		
-		model.addAttribute("listOfClients", listOfClients);
-		
-		return "resultListClients";
+	//Controleur qui affiche le formulaire vide
+	@RequestMapping(value="/admin/createCompte")
+	public String ajoutCompte() {
+		return "insertCompte"; //le formulaire à appeler
 	}
-	
-	@RequestMapping(value = "/findCompte")
+
+	@RequestMapping(value="/admin/createCompte", method=RequestMethod.POST)
+	public String treatmentAjoutCompte(Model model, 
+		@RequestParam("idClient") String idClient,
+		@RequestParam("numero") String numero,
+		@RequestParam("solde") String solde)
+		{
+		
+			Client client = new Client();
+			
+			try {
+				client = Find.findClient(idClient);
+				model.addAttribute("client", client);
+			
+				Compte c = new Compte();
+				c.setClient(client);
+				c.setNumero(new Long(numero));
+				c.setSolde(new Double(solde));
+				
+				Create.createCompte(c);
+				
+				System.out.println("Compte = "+c);
+				model.addAttribute("compte", c);
+				
+				return "resultCompte";
+			}catch(Exception e)
+			{
+				
+				return "erreur";
+			}
+	}
+
+	@RequestMapping(value = "/admin/findCompte")
 	public String findCompte(){
 		return "findCompte";
 	}
 	
-	@RequestMapping(value="/findCompte", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/findCompte", method=RequestMethod.POST)
 	public String treatmentFindCompte(Model model, @RequestParam("id") String id)
 	{
 		Compte compte = new Compte();
@@ -116,12 +137,12 @@ public class FormController {
 		return "resultCompte";
 	}
 	
-	@RequestMapping(value = "/findComptesClient")
+	@RequestMapping(value = "/admin/findComptesClient")
 	public String findComptesClient(){
 		return "findComptesClient";
 	}
 	
-	@RequestMapping(value = "/findComptesClient", method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/findComptesClient", method=RequestMethod.POST)
 	public String treatmentFindComptesClient(Model model, @RequestParam("id") String id)
 	{
 		List<Compte> listOfComptesClient = new ArrayList<Compte>();
@@ -135,30 +156,55 @@ public class FormController {
 		return "resultListComptesClient";
 	}
 	
+	@RequestMapping(value = "/admin/editClientList")
+	public String findAllClientsEdit(Model model)
+	{
+		List<Client> listOfClients = new ArrayList<Client>();
+			
+		listOfClients = Find.findAllClients();		
+		
+		model.addAttribute("listOfClients", listOfClients);
+		
+		return "resultListClientsEdit";
+	}
+	
+	@RequestMapping(value = "/admin/editClient", method=RequestMethod.GET)
+	public String findClientEdit(Model model, @RequestParam("idClient") String id)
+	{
+		Client client = new Client();
+		
+		client = Find.findClient(id);
+		
+		model.addAttribute("client", client);
+		
+		return "editClient";
+	}
+	
+	@RequestMapping(value = "/admin/editClient", method=RequestMethod.POST)
+	public String editClient(Model model, 
+			@RequestParam("idClient") String id,
+			@RequestParam("nom") String nom,
+			@RequestParam("prenom") String prenom,
+			@RequestParam("codePostal") String codePostal,
+			@RequestParam("ville") String ville)
+	{
+		Client updtClient = new Client();
+		updtClient.setId(new Long(id));
+		updtClient.setNom(nom);
+		updtClient.setPrenom(prenom);
+		updtClient.setCodePostal(codePostal);
+		updtClient.setVille(ville);
+	
+		Update.updateClient(updtClient);
+		
+		return "homeAdmin";
+	}
+	
 	@RequestMapping(value = "/login")
 	public String formLogin()
 	{		
 		return "formLogin";
 	}
-	
-	/*@RequestMapping(value = "/login", method=RequestMethod.POST)
-	public String formLogin(Model model, @RequestParam("idClient") String idClient, @RequestParam("password") String password)
-	{		
-		Client client = new Client();
-		
-		client = Treatment.connecter(idClient, password);
-		
-		model.addAttribute("client", client);
-		
-		if(client.getNom() == null)
-		{
-			return "erreurNonConnecte";
-		}
-		
-		sessionClient = client;
-		
-		return "homeClient";
-	}*/
 	
 	@RequestMapping(value = "/login", method=RequestMethod.POST)
 	public String formLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String password)
@@ -182,37 +228,48 @@ public class FormController {
 		return "homeClient";
 	}
 	
-	@RequestMapping(value = "/client/comptes")
+	@RequestMapping(value = "/user/listeComptes")
 	public String findSelfComptesClient(Model model)
 	{		
 		List<Compte> listOfComptesClient = new ArrayList<Compte>();
-		//Client client = Find.findClient(id);
 			
 		listOfComptesClient = Find.findEmbaddedComptes(sessionClient);
 		
-		//model.addAttribute("client", client);
 		model.addAttribute("listOfComptesClient", listOfComptesClient);
 		
 		return "resultListComptesClient";
 	}
 	
-	@RequestMapping(value = "/client/virements")
+	@RequestMapping(value = "/user/virement")
 	public String formVirement()
 	{		
 		return "formVirements";
 	}
 	
-	@RequestMapping(value = "/client/virements", method=RequestMethod.POST)
-	public String treatmentVirement(Model model, @RequestParam("numeroDebiteur") String debiteur, 
-			@RequestParam("numeroCrediteur") String crediteur, @RequestParam("montant") String montant)
+	@RequestMapping(value = "/user/virement", method=RequestMethod.POST)
+	public String treatmentVirement(Model model, @RequestParam("numeroDebiteur") String numDebiteur, 
+			@RequestParam("numeroCrediteur") String numCrediteur, @RequestParam("montant") String montant)
 	{
 		List<Compte> listOfComptesClient = new ArrayList<Compte>();
+		
+		Compte saveCompte = Find.findCompte(numDebiteur);
+		
+		try {
+			Treatment.virer(numDebiteur, numCrediteur, montant);
 			
-		Treatment.virer(new Long(debiteur), new Long(crediteur), new Double(montant));
+		}catch(Exception e) {
+			return "erreur";
+		}
 		
-		listOfComptesClient = Find.findEmbaddedComptes(sessionClient);
+		Compte updatedCompte = Find.findCompte(numDebiteur);
+		if(saveCompte.getSolde() == updatedCompte.getSolde())
+		{
+			return "erreur";
+		}
 		
-		model.addAttribute("client", sessionClient);
+		listOfComptesClient.add(updatedCompte);
+		listOfComptesClient.add(Find.findCompte(numCrediteur));
+		
 		model.addAttribute("listOfComptesClient", listOfComptesClient);
 		
 		return "resultListComptesClient";

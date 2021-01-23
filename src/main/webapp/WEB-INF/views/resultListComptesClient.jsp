@@ -32,6 +32,6 @@ tr:nth-child(even) {
 			<li>Solde : <c:out value="${compte.solde }"/></li>
 		</ul>
 	</c:forEach>
-
+	<a href="homeUser"> Retour user </a>
 </body>
 </html>
