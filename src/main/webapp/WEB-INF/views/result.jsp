@@ -29,5 +29,6 @@ tr:nth-child(even) {
 		<li>Code postal : ${client.codePostal }</li>
 		<li>Ville : ${client.ville }</li>
 	</ul>
+	<a href="../"> Retour accueil </a>
 </body>
 </html>

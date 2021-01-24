@@ -23,20 +23,16 @@ tr:nth-child(even) {
 }
 </style>
 
-<P>  Bonjour ${client.nom } </P>
-
-<h1>Fonctions utilisables</h1>
+<h1>Fonctions utilisables pour un user</h1>
 <table>
 	<tr><th>url </th> <th>description</th> </tr>
-	<tr><td><a href="client/virements"> Virements </a></td> <td>Formulaire de gestion de virements </td></tr>
-	<tr><td><a href="client/comptes"> Comptes </a></td> <td>Consultez vos comptes </td></tr>
+	<tr><td><a href="virement"> Virements </a></td> <td>Formulaire de gestion de virements </td></tr>
+	<tr><td><a href="listeComptes"> Comptes </a></td> <td>Consultez vos comptes </td></tr>
+	
+	<tr><td><a href="<c:url value="/j_spring_security_logout"/>"> Déconnexion </a></td> <td>Quitter mode admin</td></tr>
 </table>
+<br>
+<a href="../"> Retour accueil </a>
 
-
-<h2> Default actions</h2>
-<table>
-	<tr><th>url </th> <th>description</th> </tr>
-	<tr><td><a href="/m2/"> home </a> </td> <td>Menu principal</td></tr>
-</table>
 </body>
 </html>
