@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.formation.m2.spring.banque.bdd.dao.exec.Find;
-import fr.formation.m2.spring.banque.bdd.entities.Client;
+import fr.formation.m2.spring.banque.bdd.entities.User;
 
 /**
  * Handles requests for the application home page.
@@ -31,11 +31,11 @@ public class AdminController {
 	@RequestMapping(value = "/admin/listeClient")
 	public String treatmentFindClient(Model model)
 	{
-		List<Client> listOfClients = new ArrayList<Client>();
+		List<User> listOfUsers = new ArrayList<User>();
 			
-		listOfClients = Find.findAllClients();		
+		listOfUsers = Find.findAllUsers();		
 		
-		model.addAttribute("listOfClients", listOfClients);
+		model.addAttribute("listOfUsers", listOfUsers);
 		
 		return "resultListClients";
 	}

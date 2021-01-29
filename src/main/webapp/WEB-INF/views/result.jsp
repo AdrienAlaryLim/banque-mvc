@@ -24,10 +24,11 @@ tr:nth-child(even) {
 <body>
 	<h1>Résultat de la saisie</h1>
 	<ul>
-		<li>Nom : ${client.nom }</li>
-		<li>Prenom : ${client.prenom }</li>
-		<li>Code postal : ${client.codePostal }</li>
-		<li>Ville : ${client.ville }</li>
+		<li>Nom : ${user.nom }</li>
+		<li>Prenom : ${user.prenom }</li>
+		<li>Username : ${user.username }</li>
+		<li>Code postal : ${user.codePostal }</li>
+		<li>Ville : ${user.ville }</li>
 	</ul>
 	<a href="../"> Retour accueil </a>
 </body>

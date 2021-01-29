@@ -24,13 +24,14 @@ tr:nth-child(even) {
 
 <body>
 	<h1>Résultat de la saisie</h1>
-		<c:forEach var="client" items="${listOfClients}">
+		<c:forEach var="user" items="${listOfUsers}">
 			<ul>
-				<li>Nom : <c:out value="${client.nom }"/></li>
-				<li>Prenom : <c:out value="${client.prenom }"/></li>
-				<li>Code postal : <c:out value="${client.codePostal }"/></li>
-				<li>Ville : <c:out value="${client.ville }"/></li>
+				<li>Nom : <c:out value="${user.nom }"/></li>
+				<li>Prenom : <c:out value="${user.prenom }"/></li>
+				<li>Code postal : <c:out value="${user.codePostal }"/></li>
+				<li>Ville : <c:out value="${user.ville }"/></li>
 			</ul>
 		</c:forEach>
+		<a href="../"> Retour accueil </a>
 </body>
 </html>

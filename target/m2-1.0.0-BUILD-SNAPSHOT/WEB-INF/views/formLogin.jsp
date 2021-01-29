@@ -1,6 +1,7 @@
 <form method="POST">
-	<p>User <input type="number" name="idClient"/> </p>
-	<p>Paswword <input type="text" name="password"/> </p>
+	<p>Username <input type="text" name="username"/> </p>
+	<p>Paswword <input type="password" name="password"/> </p>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
 	
 	<input type="submit" value="Login"/>
 </form>

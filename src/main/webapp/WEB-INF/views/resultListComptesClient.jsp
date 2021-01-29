@@ -24,14 +24,14 @@ tr:nth-child(even) {
 
 <body>
 	
-	<h1>Voici le(s) compte(s) assosicé(s) au client ${client.nom }</h1>
+	<h1>Voici le(s) compte(s) assosicé(s) au client ${user.username }</h1>
 		
-	<c:forEach var="compte" items="${listOfComptesClient}">
+	<c:forEach var="compte" items="${listOfComptesUser}">
 		<ul>
 			<li>Numéro : <c:out value="${compte.numero }"/></li>
 			<li>Solde : <c:out value="${compte.solde }"/></li>
 		</ul>
 	</c:forEach>
-	<a href="homeUser"> Retour user </a>
+	<a href="../"> Retour </a>
 </body>
 </html>
